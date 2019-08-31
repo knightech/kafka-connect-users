@@ -1,0 +1,1 @@
+./gradlew clean build copyMysql copySpooldir; docker build --tag petecknight/conny:4.0.0 .; docker push petecknight/conny:4.0.0; kubectl apply -f deployment.yml 

@@ -1,0 +1,13 @@
+{
+  "tasks.max": "1",
+  "connector.class": "com.github.jcustenborder.kafka.connect.spooldir.SpoolDirCsvSourceConnector",
+  "csv.first.row.as.header": "true",
+  "input.file.pattern" : "^orders.*.csv$",
+  "input.path": "/data/input",
+  "finished.path": "/data/finished",
+  "error.path": "/data/error",
+  "halt.on.error": "false",
+  "topic": "orders",
+  "key.schema" : "{\"name\":\"com.github.jcustenborder.kafka.connect.model.Key\",\"type\":\"STRUCT\",\"isOptional\":false,\"fieldSchemas\":{\"order_id\":{\"type\":\"INT64\",\"isOptional\":true}}}",
+  "value.schema" : "{\"name\":\"com.github.jcustenborder.kafka.connect.model.Value\",\"type\":\"STRUCT\",\"isOptional\":false,\"fieldSchemas\":{\"order_id\":{\"type\":\"INT64\",\"isOptional\":true},\"customer_id\":{\"type\":\"INT64\",\"isOptional\":true},\"order_total_usd\":{\"type\":\"STRING\",\"isOptional\":true},\"make\":{\"type\":\"STRING\",\"isOptional\":true},\"model\":{\"type\":\"STRING\",\"isOptional\":true},\"delivery_city\":{\"type\":\"STRING\",\"isOptional\":true},\"delivery_company\":{\"type\":\"STRING\",\"isOptional\":true},\"delivery_address\":{\"type\":\"STRING\",\"isOptional\":true},\"credit_card\":{\"type\":\"STRING\",\"isOptional\":true}}}"
+}

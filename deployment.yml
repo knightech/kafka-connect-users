@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: conny-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: conny-service
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5181"
+    spec:
+      containers:
+      - name: conny-app
+        image: petecknight/conny:5.0.0
+        imagePullPolicy: Never
+        ports:
+          - name: liveness-port
+            containerPort: 8083
+            hostPort: 8083
+        volumeMounts:
+          - name: my-reference-to-the-volume
+            mountPath: /data
+#        readinessProbe:
+#          exec:
+#            command:
+#              - /bin/sh
+#              - -c
+#              - curl -s http://127.0.0.1:8083/connectors/bibby/status | grep "RUNNING"
+#          initialDelaySeconds: 240
+#          periodSeconds: 5
+#          timeoutSeconds: 5
+#          successThreshold: 1
+#          failureThreshold: 10
+#        livenessProbe:
+#          exec:
+#            command:
+#              - /bin/sh
+#              - -c
+#              - curl -s http://127.0.0.1:8083/connectors/bibby/status | grep "RUNNING"
+#          initialDelaySeconds: 300
+#          periodSeconds: 60
+#          timeoutSeconds: 10
+#          successThreshold: 1
+#          failureThreshold: 3
+      volumes:
+        - name: my-reference-to-the-volume
+          persistentVolumeClaim:
+            claimName: my-claim
+

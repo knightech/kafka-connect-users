@@ -1,0 +1,30 @@
+apply plugin: "java"
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://packages.confluent.io/maven' }
+}
+
+configurations {
+	mysql
+	spooldir
+}
+
+dependencies {
+	mysql "mysql:mysql-connector-java:8.0.17"
+	spooldir "com.github.jcustenborder:kafka-connect-spooldir:1.0.41"
+}
+
+task copyMysql(type: Copy) {
+	from configurations.mysql
+	into "$buildDir/mysql"
+}
+
+task copySpooldir(type: Copy) {
+	from configurations.spooldir
+	into "$buildDir/spooldir"
+}
+
